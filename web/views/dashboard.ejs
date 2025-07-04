@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard - Nerdbot</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    h2 { margin-bottom: 10px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
+    form { margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h2>📊 Painel de Controle - Nerdbot</h2>
+
+  <h3>👥 Usuários</h3>
+  <table>
+    <tr><th>ID</th><th>Nome</th><th>Saldo (R$)</th></tr>
+    <% users.forEach(u => { %>
+      <tr>
+        <td><%= u.id %></td>
+        <td><%= u.name %></td>
+        <td><%= u.saldo.toFixed(2) %></td>
+      </tr>
+    <% }) %>
+  </table>
+
+  <h3>➕ Adicionar saldo</h3>
+  <form method="POST" action="/add-saldo">
+    <input type="text" name="userId" placeholder="ID do usuário" required />
+    <input type="number" step="0.01" name="valor" placeholder="Valor (R$)" required />
+    <button type="submit">Adicionar</button>
+  </form>
+
+  <h3>🛍️ Produtos</h3>
+  <table>
+    <tr><th>ID</th><th>Nome</th><th>Preço</th></tr>
+    <% produtos.forEach(p => { %>
+      <tr>
+        <td><%= p.id %></td>
+        <td><%= p.nome %></td>
+        <td>R$<%= p.preco.toFixed(2) %></td>
+      </tr>
+    <% }) %>
+  </table>
+</body>
+</html>
